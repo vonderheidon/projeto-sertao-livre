@@ -31,17 +31,30 @@ vendedores = {1:['a','','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456'
 
 iniProd = {1:2,2:1}
 
-produtos = {1:[['1001','Banana',0.48,'Banana Nanica',5],['1002','Goiaba',0.96,'Goiaba da terra',12]],2:[['2001','Ovo',22.30,'Ovo tamanho grande',0]]}
+produtos = {1:[['1001','Banana',6.23,'Banana Nanica',12],['1002','Goiaba',0.96,'Goiaba da terra',12]],2:[['2001','Ovo',22.30,'Ovo tamanho grande',0]]}
 
 clientes = {1:['s','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
-iniComp = {1:3,2:1}
+iniComp = {1:2,2:1}
 
 compras = {
-    1:[{'sam1001':[['banana',5],['uva',3]]},{'sam1002':[['Limão',2]]},{'sam1003':[['Lapis',2],['Borracha',1],['Caneta',3],['Caderno',4]]}],
-    2:[{'mar1001':[['Goiaba',4],['uva',1],['Laranja',6]]}]
+    1: [{'sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
+        {'sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
+    2: [{'mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
+def retornaPedidos(vid):
+    pedidos = dict()
+    achei = False
+    for chave1 in compras:
+        for dicionario1 in compras[chave1]:
+            for chave2 in dicionario1:
+                if chave1 == vid:
+                    pedidos[chave2] = dicionario1[chave2]
+                    achei = True
+        if achei:
+            return pedidos
+            break
 
 def selecionaID(cod):
     achei = False

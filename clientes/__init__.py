@@ -61,10 +61,27 @@ def atualizarInfoPessoais(vid):
 
 def minhasCompras(vid):
     if existeItem(compras,vid):
-        print(45 * '-')
-        print(f'{CBLU}Suas compras | {clientes[vid][2]}{CEND}')
-        print(f'\n{compras}')
-        input('\nEnter pra continuar.')
+        while True:
+            print(45 * '-')
+            print(f'{CBLU}Lista de pedidos | {clientes[vid][2]}{CEND}')
+            pedidos = retornaPedidos(vid)
+            for chave in pedidos.keys():
+                print(f'\nCod: {chave}\nProdutos:', end='')
+                for item in pedidos[chave]:
+                    print(f' | {item[1]} - Un: {item[4]}', end='')
+                print()
+            print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')
+            opcao = str(input('\nDigite a opcao desejada: '))
+            if (opcao == '1'):
+                cod = str(input('Digite o código do pedido: '))
+                if cod in pedidos.keys():
+                    input('ok')
+                else:
+                    erro('Pedido não encontrado.')
+            elif (opcao == '0'):
+                break
+            else:
+                erro('Opção inválida.')
     else:
         erro('Você ainda não fez nenhuma compra.')
         return
