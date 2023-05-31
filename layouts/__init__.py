@@ -26,25 +26,25 @@ def layMsec(texto):
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
-def layMPrincipal(bd,vid,texto):
-    print(f'{CGRE}\nSeja Bem vindo, {bd[vid][2]}.{CEND}')
+def layMPrincipal(bd,xid,texto):
+    print(f'{CGRE}\nSeja Bem vindo, {bd[xid][2]}.{CEND}')
     print(texto)
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
-def layMmperf(bd,vid):
+def layMmperf(bd,xid):
     print(45 * '-')
-    print(f'{CBLU}Tela de perfil | {bd[vid][2]}{CEND}')
-    print(f'\nNome completo: {bd[vid][2]}')
-    print(f'E-mail: {bd[vid][3]}')
-    print(f'Usuario: {bd[vid][0]}')
+    print(f'{CBLU}Tela de perfil | {bd[xid][2]}{CEND}')
+    print(f'\nNome completo: {bd[xid][2]}')
+    print(f'E-mail: {bd[xid][3]}')
+    print(f'Usuario: {bd[xid][0]}')
     print('\n[1] - Atualizar informacoes pessoais\n[0] - Para voltar ao menu anterior')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
-def layAttinf(bd,vid):
+def layAttinf(bd,xid):
     print(60 * '-')
-    print(f'{CBLU}Tela de atualizacao de informacoes pessoais | {bd[vid][2]}{CEND}')
+    print(f'{CBLU}Tela de atualizacao de informacoes pessoais | {bd[xid][2]}{CEND}')
     print('\n[1] - Nome completo\n[2] - E-mail\n[3] - Usuario\n[4] - Senha\n[0] - Para voltar ao menu anterior')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao

@@ -7,15 +7,15 @@ def existeVendedor(dadoInserido):
             return vid
 
 def existeDado(dadoInserido,bd):
-    for vid in bd:
-        if (dadoInserido == bd[vid][0]):
-            return vid
+    for xid in bd:
+        if (dadoInserido == bd[xid][0]):
+            return xid
 
 def ultimoId(bd):
     ultimo = 0
-    for vid in bd.keys():
-        if vid > ultimo:
-            ultimo = vid
+    for xid in bd.keys():
+        if xid > ultimo:
+            ultimo = xid
     return ultimo
 
 def cadastroBD(infos,novoId,bd1,bd2,bd3):
@@ -43,13 +43,13 @@ compras = {
     2: [{'2mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
-def retornaPedidos(vid):
+def retornaPedidos(cid):
     pedidos = dict()
     achei = False
     for chave1 in compras:
         for dicionario1 in compras[chave1]:
             for chave2 in dicionario1:
-                if chave1 == vid:
+                if chave1 == cid:
                     pedidos[chave2] = dicionario1[chave2]
                     achei = True
         if achei:
@@ -84,14 +84,14 @@ def selecionaID(cod):
             break
     return prod
 
-def existeItem(bd, vid):
-    if (len(bd[vid]) > 0):
+def existeItem(bd, xid):
+    if (len(bd[xid]) > 0):
         return True
     else:
         return False
 
-def detalheProduto(vid,cod):
-    for prod in produtos[vid]:
+def detalheProduto(xid,cod):
+    for prod in produtos[xid]:
         if cod == prod[0]:
             print(f'\nCódigo: {CGRE}{prod[0]}{CEND}')
             print(f'Nome: {prod[1]}')
@@ -158,26 +158,26 @@ def entrar(op):
         else:
             erro('Usuario ou senha inválidos.')
     elif (op == 'cliente'):
-        vid = existeDado(usuario, clientes)
-        if (vid != None) and (clientes[vid][1] == senha):
-            return vid
+        cid = existeDado(usuario, clientes)
+        if (cid != None) and (clientes[cid][1] == senha):
+            return cid
         else:
             erro('Usuario ou senha inválidos.')
 
-def atualizarDados(bd,vid,prompt1,tamanho,campo):
-    infoAtual = (f'\n{prompt1} atual eh: {bd[vid][campo]}')
+def atualizarDados(bd,xid,prompt1,tamanho,campo):
+    infoAtual = (f'\n{prompt1} atual eh: {bd[xid][campo]}')
     dado = verInputStr(tamanho,'Digite o novo: ',prompt1,prompt3=infoAtual)
     if (dado != False):
-        attDadosBD(bd, vid, dado, campo)
-        aviso(f'{prompt1} foi atualizado com sucesso para {bd[vid][campo]}')
+        attDadosBD(bd, xid, dado, campo)
+        aviso(f'{prompt1} foi atualizado com sucesso para {bd[xid][campo]}')
 
-def atualizarUsuario(bd,vid,prompt1,tamanho):
+def atualizarUsuario(bd,xid,prompt1,tamanho):
     while True:
-        infoAtual = (f'\n{prompt1} atual eh: {bd[vid][0]}')
+        infoAtual = (f'\n{prompt1} atual eh: {bd[xid][0]}')
         usuario = verInputStr(tamanho, 'Digite o novo: ', prompt1, prompt3=infoAtual)
         existe = existeVendedor(usuario)
         if (existe != None):
-            if (usuario == bd[vid][0]):
+            if (usuario == bd[xid][0]):
                 break
             print(f'{CRED}\nErro! esse usuario ja esta em uso.{CEND}')
             if not tentarNovamente():
@@ -185,15 +185,15 @@ def atualizarUsuario(bd,vid,prompt1,tamanho):
         else:
             break
     if (usuario != False):
-        attDadosBD(bd,vid,usuario,0)
+        attDadosBD(bd, xid, usuario, 0)
         aviso(f'Usuario atualizado com sucesso para {usuario}')
 
-def atualizarSenha(bd, vid, prompt1, tamanho):
+def atualizarSenha(bd, xid, prompt1, tamanho):
     senhaantiga = str(input('\nDigite a senha antiga: '))
-    if (senhaantiga != bd[vid][1]):
+    if (senhaantiga != bd[xid][1]):
         erro('A senha digitada esta errada!')
     else:
         senha = verInputStr(tamanho, 'Digite a nova: ', prompt1)
         if (senha != False):
-            attDadosBD(bd, vid, senha, 1)
+            attDadosBD(bd, xid, senha, 1)
             aviso(f'Senha atualizada com sucesso.')
