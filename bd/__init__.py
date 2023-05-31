@@ -56,6 +56,23 @@ def retornaPedidos(vid):
             return pedidos
             break
 
+def detalhaPedidos(cod,pedidos):
+    achei = False
+    for chave in pedidos.keys():
+        if (chave == cod):
+            achei = True
+            total = 0
+            print(f'\nTotal de produtos: {len(pedidos[chave])}')
+            for item in pedidos[chave]:
+                print(f'\n{item[1]}')
+                print(f'R$ {item[2]} | un. {item[4]}')
+                print(f'Descrição: {item[3]}')
+                parcial = item[2] * item[4]
+                total += parcial
+            print(f'\nTotal da compra: R$ {total}')
+        if achei:
+            break
+
 def selecionaID(cod):
     achei = False
     for prod in produtos:
@@ -76,7 +93,7 @@ def existeItem(bd, vid):
 def detalheProduto(vid,cod):
     for prod in produtos[vid]:
         if cod == prod[0]:
-            print(f'\nCódigo: {prod[0]}')
+            print(f'\nCódigo: {CGRE}{prod[0]}{CEND}')
             print(f'Nome: {prod[1]}')
             print(f'Preço: R$ {prod[2]:.2f}')
             print(f'Descrição: {prod[3]}')

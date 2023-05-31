@@ -66,7 +66,7 @@ def minhasCompras(vid):
             print(f'{CBLU}Lista de pedidos | {clientes[vid][2]}{CEND}')
             pedidos = retornaPedidos(vid)
             for chave in pedidos.keys():
-                print(f'\nCod: {chave}\nProdutos:', end='')
+                print(f'\nCod: {CGRE}{chave}{CEND}\nProdutos:', end='')
                 for item in pedidos[chave]:
                     print(f' | {item[1]} - Un: {item[4]}', end='')
                 print()
@@ -75,6 +75,7 @@ def minhasCompras(vid):
             if (opcao == '1'):
                 cod = str(input('Digite o código do pedido: '))
                 if cod in pedidos.keys():
+                    detalhaPedidos(cod,pedidos)
                     input('ok')
                 else:
                     erro('Pedido não encontrado.')
@@ -116,7 +117,7 @@ def pesquisaProd(campo,prompt):
                         if not achei:
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
                             print(f'\nCódigo - Produto - Descrição')
-                        print(f'{item[0]} - {item[1]} - {item[3]}')
+                        print(f'{CGRE}{item[0]}{CEND} - {item[1]} - {item[3]}')
                         achei = True
             if achei:
                 print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')

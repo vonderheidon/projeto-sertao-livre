@@ -30,11 +30,22 @@ def retornaPedidos(vid):
             break
 
 pedidos = retornaPedidos(1)
+achei = False
 for chave in pedidos.keys():
-    print(f'\nCod: {chave}\nProdutos:',end='')
-    for item in pedidos[chave]:
-        print(f' | {item[1]} - Un: {item[4]}',end='')
-    print()
+    if (chave == 'sam1001'):
+        achei = True
+        total = 0
+        print(f'Codigo do pedido: {chave}')
+        print(f'Total de produtos: {len(pedidos[chave])}')
+        for item in pedidos[chave]:
+            print(f'\n{item[1]}')
+            print(f'R$ {item[2]} | un. {item[4]}')
+            print(f'Descrição: {item[3]}')
+            parcial = item[2] * item[4]
+            total += parcial
+        print(f'\nTotal da compra: R$ {total}')
+    if achei:
+        break
 
 
 
