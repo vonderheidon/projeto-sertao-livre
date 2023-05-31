@@ -7,21 +7,37 @@ compras = {
         {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
+carrinho = {2: ['1001', 'Banana', 6.23, 'Banana Nanica', 90]}
 
+def finalizaPedido(cid):
+    nid = '2ma2002'
+    for chave1 in compras:
+        if (chave1 == cid):
+            compras[chave1].append({nid: []})
+            for dicicionario1 in compras[chave1]:
+                for chave2 in dicicionario1:
+                    if (chave2 == nid):
+                        for pedido in carrinho.values():
+                            dicicionario1[chave2].append(pedido)
+                        break
+            break
+    print(f'Pedido código {nid} finalizado com com sucesso.')
+finalizaPedido(2)
+print(compras)
 
-
+'''
 for chave1 in compras:
     for dicionario1 in compras[chave1]:
         for chave2 in dicionario1:
             for lista1 in dicionario1[chave2]:
                 for k in lista1:
-                    if k == 'Goiaba' and chave2=='sam1002':
+                    if k == 'Goiaba' and chave2=='1sa1002':
                         if lista1[4] > 0:
                             print(f'QTD: {lista1[4] - 1}')
                             break
                         else:
                             print('Quantidade em estoque insuficiente.')
-'''
+
 #Retorna todos pedidos de acordo com o id informado do cliente
 def retornaPedidos(vid):
     pedidos = dict()
@@ -53,8 +69,6 @@ for chave in pedidos.keys():
         print(f'\nTotal da compra: R$ {total}')
     if achei:
         break
-'''
-
 
 op = str(input('\nDigite o numero do pedido: '))
 achei = False
@@ -74,3 +88,4 @@ if achei:
     for item in listaProdutos:
         print(f'\nProduto: {item[1]}')
         print(f'Quantidade: {item[4]}')
+'''

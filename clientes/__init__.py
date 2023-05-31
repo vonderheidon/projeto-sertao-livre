@@ -167,10 +167,25 @@ def comprarProduto(cid, cod, vid):
         if (qtd != 'erro'):
             acao = manipulaEstoque(vid, cod, qtd, op='retira')
             if (acao == 'retirado'):
-                aviso('Produto comprado com sucesso.')
+                finalizaPedido(cid)
                 return True
             elif (acao == 'insuficiente'):
                 erro('A quantidade em estoque é insuficiente para a quantidade informada.')
                 break
         else:
             break
+
+def finalizaPedido(cid):
+    nid = novoIdCompra(cid)
+    for chave1 in compras:
+        if (chave1 == cid):
+            compras[chave1].append({nid: []})
+            for dicicionario1 in compras[chave1]:
+                for chave2 in dicicionario1:
+                    if (chave2 == nid):
+                        for pedido in carrinho.values():
+                            dicicionario1[chave2].append(pedido)
+                        carrinho.clear()
+                        break
+            break
+    aviso(f'Pedido código {nid} finalizado com com sucesso.')

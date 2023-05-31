@@ -40,10 +40,12 @@ iniComp = {1:2,2:1}
 compras = {
     1: [{'1sa1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
         {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
-    2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
+    2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',3]]}]
            }
 
-carrinho = []
+iniCar = [0]
+
+carrinho = dict()
 
 
 def retornaPedidos(cid):
@@ -72,7 +74,7 @@ def detalhaPedidos(cod,pedidos):
                 print(f'Descrição: {item[3]}')
                 parcial = item[2] * item[4]
                 total += parcial
-            print(f'\nTotal da compra: R$ {total}')
+            print(f'\nTotal da compra: R$ {total:.2f}')
         if achei:
             break
 
@@ -115,6 +117,9 @@ def manipulaEstoque(vid, cod, qtd, op=''):
                 resultado = estoque - qtd
                 if (resultado >= 0):
                     prod[4] -= qtd
+                    iniCar[0] += 1
+                    carrinho[iniCar[0]] = prod.copy()
+                    carrinho[iniCar[0]][4] = qtd
                     return 'retirado'
                 else:
                     return 'insuficiente'
