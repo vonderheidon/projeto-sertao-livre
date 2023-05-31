@@ -76,7 +76,7 @@ def minhasCompras(vid):
                 cod = str(input('Digite o código do pedido: '))
                 if cod in pedidos.keys():
                     detalhaPedidos(cod,pedidos)
-                    input('Pressione ENTER para voltar o menu anterior.')
+                    input('\nPressione ENTER para voltar o menu anterior.')
                 else:
                     erro('Pedido não encontrado.')
             elif (opcao == '0'):
@@ -103,7 +103,7 @@ def pesquisarProd(vid):
         else:
             erro('Opcao invalida.')
 
-def pesquisaProd(campo,prompt):
+def pesquisaProd(campo, prompt):
     codigos = list()
     busca = str(input(f'\nPesquisando {prompt}: ').lower())
     if (busca != ''):

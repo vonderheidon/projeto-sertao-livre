@@ -38,9 +38,9 @@ clientes = {1:['s','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456',
 iniComp = {1:2,2:1}
 
 compras = {
-    1: [{'sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
-        {'sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
-    2: [{'mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
+    1: [{'1sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
+        {'1sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
+    2: [{'2mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
 def retornaPedidos(vid):
