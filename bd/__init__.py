@@ -31,17 +31,20 @@ vendedores = {1:['a','','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456'
 
 iniProd = {1:2,2:1}
 
-produtos = {1:[['1001','Banana',6.23,'Banana Nanica',12],['1002','Goiaba',0.96,'Goiaba da terra',12]],2:[['2001','Ovo',22.30,'Ovo tamanho grande',0]]}
+produtos = {1:[['1001','Banana',6.23,'Banana Nanica',12],['1002','Goiaba',0.96,'Goiaba da terra',12]],2:[['2001','Ovo',22.30,'Ovo tamanho grande',3]]}
 
-clientes = {1:['s','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
+clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
 iniComp = {1:2,2:1}
 
 compras = {
-    1: [{'1sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
-        {'1sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
-    2: [{'2mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
+    1: [{'1sa1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
+        {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
+    2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
+
+carrinho = []
+
 
 def retornaPedidos(cid):
     pedidos = dict()
@@ -90,8 +93,8 @@ def existeItem(bd, xid):
     else:
         return False
 
-def detalheProduto(xid,cod):
-    for prod in produtos[xid]:
+def detalheProduto(vid, cod):
+    for prod in produtos[vid]:
         if cod == prod[0]:
             print(f'\nCódigo: {CGRE}{prod[0]}{CEND}')
             print(f'Nome: {prod[1]}')
@@ -102,8 +105,26 @@ def detalheProduto(xid,cod):
                 return True
             else:
                 return False
+            break
 
-def excluiProduto(vid,cod):
+def manipulaEstoque(vid, cod, qtd, op=''):
+    for prod in produtos[vid]:
+        if (cod == prod[0]):
+            estoque = prod[4]
+            if (op == 'retira'):
+                resultado = estoque - qtd
+                if (resultado >= 0):
+                    prod[4] -= qtd
+                    return 'retirado'
+                else:
+                    return 'insuficiente'
+            elif (op == 'devolve'):
+                prod[4] += qtd
+                return 'devolvido'
+            break
+
+
+def excluiProduto(vid, cod):
     for prod in produtos[vid]:
         if cod == prod[0]:
             produtos[vid].remove(prod)
@@ -145,6 +166,18 @@ def cadastrarUsuario(op):
                         novoId = ultimoId(clientes) + 1
                         cadastroBD(infos, novoId, clientes, compras, iniComp)
                     aviso(f'Cadastro de {op} efetuado com sucesso!')
+def novoIdCompra(cid):
+    iniComp[cid] += 1
+    for chave in clientes.keys():
+        if (chave == cid):
+            iniciais = ''
+            nome = clientes[chave][0]
+            for i in range(2):
+                iniciais += nome[i]
+            break
+    idComp = f'{cid}' + f'{iniComp[cid]:03}'
+    novoId = str(cid) + iniciais + idComp
+    return novoId
 
 def entrar(op):
     print(39 * '-')

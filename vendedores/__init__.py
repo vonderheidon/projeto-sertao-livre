@@ -116,8 +116,7 @@ def manipulaProduto(vid,cod='',opcao=''):
                     if (opcao == 'cadastrar'):
                         iniProd[vid] += 1
                         idProd = f'{vid}' + f'{iniProd[vid]:03}'
-                        novoId = int(idProd)
-                        produtos[vid].append([str(novoId), nome, preco, descricao, quantidade])
+                        produtos[vid].append([idProd, nome, preco, descricao, quantidade])
                         aviso('Produto cadastrado com sucesso.')
                     elif (opcao == 'atualizar'):
                         dados = [nome,preco,descricao,quantidade]

@@ -1,7 +1,11 @@
+clientes = {1:['sam','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
+
+iniComp = {1:2,2:1}
+
 compras = {
-    1: [{'sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
-        {'sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',0]]}],
-    2: [{'mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
+    1: [{'1sa1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
+        {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
+    2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
 

@@ -18,13 +18,15 @@ def menuCliente(texto):
 
 def menuPrincipal(cid):
     while True:
-        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[0] - Sair da conta')
+        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Ver Carrinho\n[0] - Sair da conta')
         menu = layMPrincipal(clientes, cid, texto)
         if (menu == '1'):
             meuPerfil(cid)
         elif (menu == '2'):
             minhasCompras(cid)
         elif (menu == '3'):
+            pesquisarProd(cid)
+        elif (menu == '4'):
             pesquisarProd(cid)
         elif (menu == '0'):
             break
@@ -95,15 +97,15 @@ def pesquisarProd(cid):
         print('\n[1] - Nome\n[2] - Descrição\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
-            pesquisaProd(1, 'no nome')
+            resultPesquisaProd(1, 'no nome', cid)
         elif (opcao == '2'):
-            pesquisaProd(3, 'na descrição')
+            resultPesquisaProd(3, 'na descrição', cid)
         elif (opcao == '0'):
             break
         else:
             erro('Opcao invalida.')
 
-def pesquisaProd(campo, prompt):
+def resultPesquisaProd(campo, prompt, cid):
     codigos = list()
     busca = str(input(f'\nPesquisando {prompt}: ').lower())
     if (busca != ''):
@@ -125,8 +127,8 @@ def pesquisaProd(campo, prompt):
                 if (opcao == '1'):
                     cod = str(input('Digite o código do produto: '))
                     if cod in codigos:
-                        cid = selecionaID(cod)
-                        exibirDetalhes(cid, cod)
+                        vid = selecionaID(cod)
+                        exibirDetalhes(cid, cod, vid)
                     else:
                         erro('Produto não encontrado.')
                 elif (opcao == '0'):
@@ -139,26 +141,16 @@ def pesquisaProd(campo, prompt):
     else:
         erro(f'O campo de pesquisa não deve ficar em branco.')
 
-def listarProdutos():
-    print(f'\n{produtos}\n')
-    for prod in produtos.values():
-        for item in prod:
-            print(f'\nNome: {item[1]}')
-            print(f'Preço: {item[2]}')
-            if (item[4] > 0):
-                print(f'Quantidade em estoque: {item[4]}')
-            else:
-                print('Produto esgotado!')
-
-def exibirDetalhes(cid, cod):
+def exibirDetalhes(cid, cod, vid):
     while True:
         print(45 * '-')
         print(f'{CBLU}Tela de detalhes do produto | {clientes[cid][2]}{CEND}')
-        if detalheProduto(cid, cod):
+        if detalheProduto(vid, cod):
             print('\n[1] - Comprar\n[2] - Adicionar ao carrinho\n[0] - Voltar ao menu anterior')
             opcao = str(input('\nDigite a opcao desejada: '))
             if (opcao == '1'):
-                input('\nUM')
+                if comprarProduto(cid, cod, vid):
+                    return
             elif (opcao == '2'):
                 input('\nDOIS')
             elif (opcao == '0'):
@@ -167,4 +159,18 @@ def exibirDetalhes(cid, cod):
                 erro('Opcao invalida.')
         else:
             erro('Esse produto está esgotado.')
+            break
+
+def comprarProduto(cid, cod, vid):
+    while True:
+        qtd = verInputNum('Digite a quantidade desejada: ',tipo='int')
+        if (qtd != 'erro'):
+            acao = manipulaEstoque(vid, cod, qtd, op='retira')
+            if (acao == 'retirado'):
+                aviso('Produto comprado com sucesso.')
+                return True
+            elif (acao == 'insuficiente'):
+                erro('A quantidade em estoque é insuficiente para a quantidade informada.')
+                break
+        else:
             break
