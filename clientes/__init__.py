@@ -76,7 +76,7 @@ def minhasCompras(vid):
                 cod = str(input('Digite o código do pedido: '))
                 if cod in pedidos.keys():
                     detalhaPedidos(cod,pedidos)
-                    input('ok')
+                    input('Pressione ENTER para voltar o menu anterior.')
                 else:
                     erro('Pedido não encontrado.')
             elif (opcao == '0'):
