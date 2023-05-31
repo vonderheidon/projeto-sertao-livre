@@ -1,6 +1,6 @@
 compras = {
     1: [{'sam1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
-        {'sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
+        {'sam1002': [['1002','Goiaba',0.96,'Goiaba da terra',0]]}],
     2: [{'mar1001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
@@ -11,10 +11,13 @@ for chave1 in compras:
         for chave2 in dicionario1:
             for lista1 in dicionario1[chave2]:
                 for k in lista1:
-                    if k == 'Goiabxxx':
-                        print(f'Nome: {lista1[1]}')
-                        break
-
+                    if k == 'Goiaba' and chave2=='sam1002':
+                        if lista1[4] > 0:
+                            print(f'QTD: {lista1[4] - 1}')
+                            break
+                        else:
+                            print('Quantidade em estoque insuficiente.')
+'''
 #Retorna todos pedidos de acordo com o id informado do cliente
 def retornaPedidos(vid):
     pedidos = dict()
@@ -46,7 +49,7 @@ for chave in pedidos.keys():
         print(f'\nTotal da compra: R$ {total}')
     if achei:
         break
-
+'''
 
 
 op = str(input('\nDigite o numero do pedido: '))
