@@ -27,7 +27,7 @@ def menuPrincipal(cid):
         elif (menu == '3'):
             pesquisarProd(cid)
         elif (menu == '4'):
-            pesquisarProd(cid)
+            meuCarrinho(cid)
         elif (menu == '0'):
             break
         else:
@@ -89,6 +89,21 @@ def minhasCompras(cid):
         erro('Você ainda não fez nenhuma compra.')
         return
 
+def meuCarrinho(cid):
+    if (len(carrinho) > 0):
+        print(45 * '-')
+        print(f'{CBLU}Meu carrinho | {clientes[cid][2]}{CEND}')
+        totalPedido = 0
+        for chave in carrinho.keys():
+            print(f'\nItem nº {chave} | {carrinho[chave][1]} - Quantidade: {carrinho[chave][4]} - Preço un. R$ {carrinho[chave][2]:.2f}')
+            total = carrinho[chave][2] * carrinho[chave][4]
+            totalPedido += total
+            print(f'Total: R$ {total:.2f}')
+        print(f'\nTotal do pedido: R$ {totalPedido:.2f}')
+        input('\nEnter pra continuar...')
+    else:
+        aviso('Seu carrinho está vazio ainda.')
+
 def pesquisarProd(cid):
     while True:
         print(45 * '-')
@@ -149,10 +164,9 @@ def exibirDetalhes(cid, cod, vid):
             print('\n[1] - Comprar\n[2] - Adicionar ao carrinho\n[0] - Voltar ao menu anterior')
             opcao = str(input('\nDigite a opcao desejada: '))
             if (opcao == '1'):
-                if comprarProduto(cid, cod, vid):
-                    return
+                comprarProduto(cid, cod, vid)
             elif (opcao == '2'):
-                input('\nDOIS')
+                adicionaCarrinho(cid, cod, vid)
             elif (opcao == '0'):
                 break
             else:
@@ -165,17 +179,32 @@ def comprarProduto(cid, cod, vid):
     while True:
         qtd = verInputNum('Digite a quantidade desejada: ',tipo='int')
         if (qtd != 'erro'):
-            acao = manipulaEstoque(vid, cod, qtd, op='retira')
+            acao = manipulaEstoque(vid, cod, qtd, unico='sim', op='retira')
             if (acao == 'retirado'):
-                finalizaPedido(cid)
-                return True
+                finalizaPedido(cid, unico='sim')
+                return
             elif (acao == 'insuficiente'):
                 erro('A quantidade em estoque é insuficiente para a quantidade informada.')
                 break
         else:
             break
 
-def finalizaPedido(cid):
+def adicionaCarrinho(cid, cod, vid):
+    while True:
+        qtd = verInputNum('Digite a quantidade desejada: ', tipo='int')
+        if (qtd != 'erro'):
+            acao = manipulaEstoque(vid, cod, qtd, unico='nao', op='retira')
+            if (acao == 'retirado'):
+                aviso('Produto adicionado ao carrinho com sucesso.')
+                return
+            elif (acao == 'insuficiente'):
+                erro('A quantidade em estoque é insuficiente para a quantidade informada.')
+                break
+        else:
+            break
+
+
+def finalizaPedido(cid, unico):
     nid = novoIdCompra(cid)
     for chave1 in compras:
         if (chave1 == cid):
@@ -183,9 +212,14 @@ def finalizaPedido(cid):
             for dicicionario1 in compras[chave1]:
                 for chave2 in dicicionario1:
                     if (chave2 == nid):
-                        for pedido in carrinho.values():
-                            dicicionario1[chave2].append(pedido)
-                        carrinho.clear()
+                        if (unico == 'sim'):
+                            dicicionario1[chave2].append(cartemp[0])
+                            cartemp.clear()
+                        elif (unico == 'nao'):
+                            for pedido in carrinho.values():
+                                dicicionario1[chave2].append(pedido)
+                            carrinho.clear()
+                            iniCar[0] = 0
                         break
             break
     aviso(f'Pedido código {nid} finalizado com com sucesso.')

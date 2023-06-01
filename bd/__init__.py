@@ -46,6 +46,7 @@ compras = {
 iniCar = [0]
 
 carrinho = dict()
+cartemp = dict()
 
 
 def retornaPedidos(cid):
@@ -109,7 +110,7 @@ def detalheProduto(vid, cod):
                 return False
             break
 
-def manipulaEstoque(vid, cod, qtd, op=''):
+def manipulaEstoque(vid, cod, qtd, unico, op=''):
     for prod in produtos[vid]:
         if (cod == prod[0]):
             estoque = prod[4]
@@ -117,9 +118,13 @@ def manipulaEstoque(vid, cod, qtd, op=''):
                 resultado = estoque - qtd
                 if (resultado >= 0):
                     prod[4] -= qtd
-                    iniCar[0] += 1
-                    carrinho[iniCar[0]] = prod.copy()
-                    carrinho[iniCar[0]][4] = qtd
+                    if (unico == 'sim'):
+                        cartemp[0] = prod.copy()
+                        cartemp[0][4] = qtd
+                    elif (unico == 'nao'):
+                        iniCar[0] += 1
+                        carrinho[iniCar[0]] = prod.copy()
+                        carrinho[iniCar[0]][4] = qtd
                     return 'retirado'
                 else:
                     return 'insuficiente'

@@ -7,23 +7,11 @@ compras = {
         {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
+
 carrinho = {2: ['1001', 'Banana', 6.23, 'Banana Nanica', 90]}
 
-def finalizaPedido(cid):
-    nid = '2ma2002'
-    for chave1 in compras:
-        if (chave1 == cid):
-            compras[chave1].append({nid: []})
-            for dicicionario1 in compras[chave1]:
-                for chave2 in dicicionario1:
-                    if (chave2 == nid):
-                        for pedido in carrinho.values():
-                            dicicionario1[chave2].append(pedido)
-                        break
-            break
-    print(f'Pedido código {nid} finalizado com com sucesso.')
-finalizaPedido(2)
-print(compras)
+
+
 
 '''
 for chave1 in compras:
