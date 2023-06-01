@@ -122,9 +122,17 @@ def manipulaEstoque(vid, cod, qtd, unico, op=''):
                         cartemp[0] = prod.copy()
                         cartemp[0][4] = qtd
                     elif (unico == 'nao'):
-                        iniCar[0] += 1
-                        carrinho[iniCar[0]] = prod.copy()
-                        carrinho[iniCar[0]][4] = qtd
+                        achei = False
+                        for item in carrinho.values():
+                            if (item[0] == cod):
+                                achei = True
+                                break
+                        if achei:
+                            item[4] += qtd
+                        else:
+                            iniCar[0] += 1
+                            carrinho[iniCar[0]] = prod.copy()
+                            carrinho[iniCar[0]][4] = qtd
                     return 'retirado'
                 else:
                     return 'insuficiente'
