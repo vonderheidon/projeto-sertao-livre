@@ -71,7 +71,7 @@ def detalhaPedidos(cod,pedidos):
             print(f'\nTotal de produtos: {len(pedidos[chave])}')
             for item in pedidos[chave]:
                 print(f'\n{item[1]}')
-                print(f'R$ {item[2]} | un. {item[4]}')
+                print(f'R$ {item[2]:.2f} | un. {item[4]}')
                 print(f'Descrição: {item[3]}')
                 parcial = item[2] * item[4]
                 total += parcial
