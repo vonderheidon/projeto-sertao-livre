@@ -29,6 +29,8 @@ def menuPrincipal(cid):
         elif (menu == '4'):
             meuCarrinho(cid)
         elif (menu == '0'):
+            carrinho.clear()
+            iniCar[0] = 0
             break
         else:
             erro('Opcao invalida.')
@@ -90,19 +92,46 @@ def minhasCompras(cid):
         return
 
 def meuCarrinho(cid):
-    if (len(carrinho) > 0):
-        print(45 * '-')
-        print(f'{CBLU}Meu carrinho | {clientes[cid][2]}{CEND}')
-        totalPedido = 0
-        for chave in carrinho.keys():
-            print(f'\nItem nº {chave} | {carrinho[chave][1]} - Quantidade: {carrinho[chave][4]} - Preço un. R$ {carrinho[chave][2]:.2f}')
-            total = carrinho[chave][2] * carrinho[chave][4]
-            totalPedido += total
-            print(f'Total: R$ {total:.2f}')
-        print(f'\nTotal do pedido: R$ {totalPedido:.2f}')
-        input('\nEnter pra continuar...')
-    else:
-        aviso('Seu carrinho está vazio ainda.')
+    removido = False
+    while True:
+        if (len(carrinho) > 0):
+            print(45 * '-')
+            print(f'{CBLU}Meu carrinho | {clientes[cid][2]}{CEND}')
+            totalPedido = 0
+            for chave in carrinho.keys():
+                print(f'\nItem nº {CGRE}{chave}{CEND} | cod: {carrinho[chave][0]} - {carrinho[chave][1]} - Descrição: {carrinho[chave][3]}\nQuantidade: {carrinho[chave][4]} - Preço un. R$ {carrinho[chave][2]:.2f}')
+                total = carrinho[chave][2] * carrinho[chave][4]
+                totalPedido += total
+                print(f'Total: R$ {total:.2f}')
+            print(f'\nTotal do pedido: R$ {totalPedido:.2f}')
+            print('\n[1] - Remover item do carrinho\n[2] - Finalizar compra\n[0] - Voltar ao menu anterior')
+            opcao = str(input('\nDigite a opcao desejada: '))
+            if (opcao == '1'):
+                item = verInputNum('Digite numero do item: ',tipo='int')
+                if (item != 'erro'):
+                    if item in carrinho.keys():
+                        qtd = carrinho[item][4]
+                        cod = carrinho[item][0]
+                        vid = selecionaID(cod)
+                        manipulaEstoque(vid, cod, qtd, None, op='devolve')
+                        carrinho.pop(item)
+                        aviso('Item removido do carrinho com sucesso.')
+                        removido = True
+                    else:
+                        erro('Item não encontrado.')
+            elif (opcao == '2'):
+                finalizaPedido(cid,unico='nao')
+                removido = True
+            elif (opcao == '0'):
+                break
+            else:
+                erro('Opção inválida.')
+        else:
+            if removido:
+                iniCar[0] = 0
+            else:
+                aviso('Seu carrinho está vazio ainda.')
+            break
 
 def pesquisarProd(cid):
     while True:
@@ -113,8 +142,10 @@ def pesquisarProd(cid):
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
             resultPesquisaProd(1, 'no nome', cid)
+            break
         elif (opcao == '2'):
             resultPesquisaProd(3, 'na descrição', cid)
+            break
         elif (opcao == '0'):
             break
         else:
@@ -133,8 +164,8 @@ def resultPesquisaProd(campo, prompt, cid):
                         codigos.append(item[0])
                         if not achei:
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
-                            print(f'\nCódigo - Produto - Descrição')
-                        print(f'{CGRE}{item[0]}{CEND} - {item[1]} - {item[3]}')
+                            print(f'\nCódigo - Produto - Descrição - Preço un.')
+                        print(f'{CGRE}{item[0]}{CEND} - {item[1]} - {item[3]} - {item[2]:.2f}')
                         achei = True
             if achei:
                 print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')

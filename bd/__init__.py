@@ -31,7 +31,7 @@ vendedores = {1:['a','','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456'
 
 iniProd = {1:2,2:1}
 
-produtos = {1:[['1001','Banana',6.23,'Banana Nanica',12],['1002','Goiaba',0.96,'Goiaba da terra',12]],2:[['2001','Ovo',22.30,'Ovo tamanho grande',3]]}
+produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',12],['1002','Goiaba',0.96,'Goiaba orgânica especial',12]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
 
 clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 

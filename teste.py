@@ -8,7 +8,7 @@ compras = {
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',0]]}]
            }
 
-carrinho = {2: ['1001', 'Banana', 6.23, 'Banana Nanica', 90]}
+carrinho = {1: ['1001', 'Banana', 6.23, 'Banana Nanica', 90]}
 
 
 
