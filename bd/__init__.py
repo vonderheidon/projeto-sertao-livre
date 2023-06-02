@@ -29,9 +29,9 @@ def attDadosBD(bd,usuario,dado,campo):
 
 vendedores = {1:['a','','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
-iniProd = {1:2,2:1}
+iniProd = {1:5,2:1}
 
-produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',12],['1002','Goiaba',0.96,'Goiaba orgânica especial',12]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
+produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica especial',12],['1003','Laranja',1.06,'Laranja lima da Bahia',23],['1004','Abacaxi',5,'Abacaxi caramelo albino',8],['1005','Manga',1.30,'Manga rosa da aldeia Ibiriuproproene do Sul',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
 
 clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 

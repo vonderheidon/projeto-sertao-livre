@@ -105,7 +105,7 @@ def listarProdutos(vid):
 def listarComGrafico(vid):
     for item in produtos[vid]:
         plt.rcParams["figure.figsize"] = (12, 6)
-        plt.bar(f'Cod: {item[0]}\nProduto: {item[1]}', item[4])
+        plt.bar(f'Produto: {item[1]}\nQuantidade: {item[4]}', item[4])
     plt.show()
 
 def manipulaProduto(vid,cod='',opcao=''):
