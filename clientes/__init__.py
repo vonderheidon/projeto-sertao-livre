@@ -1,5 +1,6 @@
 from layouts import *
 from bd import *
+import matplotlib.pyplot as plt
 
 def menuCliente(texto):
     while True:
@@ -18,7 +19,7 @@ def menuCliente(texto):
 
 def menuPrincipal(cid):
     while True:
-        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Ver Carrinho\n[5] - Ver gráfico dos itens mais pesquisados\n[0] - Sair da conta')
+        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Meu Carrinho\n[5] - Ver gráfico dos 5 itens mais pesquisados\n[0] - Sair da conta')
         menu = layMPrincipal(clientes, cid, texto)
         if (menu == '1'):
             meuPerfil(cid)
@@ -168,7 +169,7 @@ def resultPesquisaProd(campo, prompt, cid):
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
                             print(f'\nCódigo - Produto - Descrição - Preço un.')
                         print(f'{CGRE}{item[0]}{CEND} - {item[1]} - {item[3]} - {item[2]:.2f}')
-                        adicionaPesquisados(item[0])
+                        adicionaPesquisados(item[0],item[1])
                         achei = True
             if achei:
                 print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')
@@ -191,23 +192,30 @@ def resultPesquisaProd(campo, prompt, cid):
         erro(f'O campo de pesquisa não deve ficar em branco.')
 
 def verMaisPesquisados():
-    input(f'\n{maisPesquisados}\n')
+    cont = 0
+    ordenado = []
+    #essa parte é toda by google
+    ordenado = (sorted(maisPesquisados, key=lambda item: item['qtd'], reverse=True))
+    for item in ordenado:
+        plt.rcParams["figure.figsize"] = (12, 6)
+        plt.bar(f'Cod: {item["cod"]}\nProduto: {item["nome"]}',item['qtd'])
+        cont += 1
+        if (cont==5):
+            break
+    plt.show()
 
-def adicionaPesquisados(item):
+def adicionaPesquisados(codProd,nome):
     if (len(maisPesquisados) > 0):
         existe = False
         for itemArm in maisPesquisados:
-            for codigo in itemArm:
-                if codigo == item:
-                    itemArm[codigo] += 1
-                    existe = True
-                    break
-            if existe:
+            if (itemArm['cod'] == codProd):
+                itemArm['qtd'] += 1
+                existe = True
                 break
         if not existe:
-            maisPesquisados.append({item: 1})
+            maisPesquisados.append({'cod': codProd, 'nome': nome, 'qtd': 1})
     else:
-        maisPesquisados.append({item: 1})
+        maisPesquisados.append({'cod':codProd, 'nome':nome, 'qtd':1})
 
 def exibirDetalhes(cid, cod, vid):
     while True:

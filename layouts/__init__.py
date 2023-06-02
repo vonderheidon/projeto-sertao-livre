@@ -52,7 +52,7 @@ def layAttinf(bd,xid):
 def layMmprod(vendedores,vid):
     print(45 * '-')
     print(f'{CBLU}Tela de produtos | {vendedores[vid][2]}{CEND}')
-    print('\n[1] - Listar todos cadastrados\n[2] - Cadastrar um novo\n[3] - Buscar\n[0] - Para voltar ao menu anterior')
+    print('\n[1] - Listar todos cadastrados\n[2] - Gráfico produtos cadastrados\n[3] - Cadastrar um novo\n[4] - Buscar\n[0] - Para voltar ao menu anterior')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 

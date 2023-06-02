@@ -43,7 +43,7 @@ compras = {
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',3]]}]
            }
 
-maisPesquisados = [{'1001': 7},{'2001':3}]
+maisPesquisados = [{'cod':'1001','nome':'Banana','qtd':3},{'cod':'1002','nome':'Goiaba','qtd':5},{'cod':'2001','nome':'Ovo','qtd':2}]
 
 iniCar = [0]
 

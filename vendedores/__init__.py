@@ -1,5 +1,6 @@
 from layouts import *
 from bd import *
+import matplotlib.pyplot as plt
 
 def menuVendedor(texto):
     while True:
@@ -63,8 +64,10 @@ def meusProdutos(vid):
         if (menu == '1'):
             listarProdutos(vid)
         elif (menu == '2'):
-            manipulaProduto(vid,opcao='cadastrar')
+            listarComGrafico(vid)
         elif (menu == '3'):
+            manipulaProduto(vid,opcao='cadastrar')
+        elif (menu == '4'):
             pesquisarProduto(vid)
         elif (menu == '0'):
             break
@@ -98,6 +101,12 @@ def listarProdutos(vid):
         else:
             erro('Você ainda não tem nenhum produto cadastrado.')
             return
+
+def listarComGrafico(vid):
+    for item in produtos[vid]:
+        plt.rcParams["figure.figsize"] = (12, 6)
+        plt.bar(f'Cod: {item[0]}\nProduto: {item[1]}', item[4])
+    plt.show()
 
 def manipulaProduto(vid,cod='',opcao=''):
     if (opcao == 'cadastrar'):
