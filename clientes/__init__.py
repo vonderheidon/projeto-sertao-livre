@@ -18,7 +18,7 @@ def menuCliente(texto):
 
 def menuPrincipal(cid):
     while True:
-        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Ver Carrinho\n[0] - Sair da conta')
+        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Ver Carrinho\n[5] - Ver gráfico dos itens mais pesquisados\n[0] - Sair da conta')
         menu = layMPrincipal(clientes, cid, texto)
         if (menu == '1'):
             meuPerfil(cid)
@@ -28,6 +28,8 @@ def menuPrincipal(cid):
             pesquisarProd(cid)
         elif (menu == '4'):
             meuCarrinho(cid)
+        elif (menu == '5'):
+            verMaisPesquisados()
         elif (menu == '0'):
             carrinho.clear()
             iniCar[0] = 0
@@ -166,6 +168,7 @@ def resultPesquisaProd(campo, prompt, cid):
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
                             print(f'\nCódigo - Produto - Descrição - Preço un.')
                         print(f'{CGRE}{item[0]}{CEND} - {item[1]} - {item[3]} - {item[2]:.2f}')
+                        adicionaPesquisados(item[0])
                         achei = True
             if achei:
                 print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')
@@ -186,6 +189,25 @@ def resultPesquisaProd(campo, prompt, cid):
                 return
     else:
         erro(f'O campo de pesquisa não deve ficar em branco.')
+
+def verMaisPesquisados():
+    input(f'\n{maisPesquisados}\n')
+
+def adicionaPesquisados(item):
+    if (len(maisPesquisados) > 0):
+        existe = False
+        for itemArm in maisPesquisados:
+            for codigo in itemArm:
+                if codigo == item:
+                    itemArm[codigo] += 1
+                    existe = True
+                    break
+            if existe:
+                break
+        if not existe:
+            maisPesquisados.append({item: 1})
+    else:
+        maisPesquisados.append({item: 1})
 
 def exibirDetalhes(cid, cod, vid):
     while True:

@@ -1,3 +1,4 @@
+
 clientes = {1:['sam','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
 iniComp = {1:2,2:1}
@@ -10,6 +11,11 @@ compras = {
 
 carrinho = {1: ['1001', 'Banana', 6.23, 'Banana Nanica', 90]}
 
+
+maisPesquisados = [{'1001': 1},{'1002':4},{'1003':2},{'1004':1},{'2001':7},{'2002':0}]
+
+
+print(maisPesquisados)
 
 
 

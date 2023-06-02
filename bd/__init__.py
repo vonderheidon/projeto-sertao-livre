@@ -43,6 +43,8 @@ compras = {
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',3]]}]
            }
 
+maisPesquisados = [{'1001': 7},{'2001':3}]
+
 iniCar = [0]
 
 carrinho = dict()
