@@ -69,6 +69,8 @@ def meusProdutos(vid):
             manipulaProduto(vid,opcao='cadastrar')
         elif (menu == '4'):
             pesquisarProduto(vid)
+        elif (menu == '5'):
+            salvaEmTxt(vid)
         elif (menu == '0'):
             break
         else:
@@ -107,6 +109,19 @@ def listarComGrafico(vid):
         plt.rcParams["figure.figsize"] = (12, 6)
         plt.bar(f'Produto: {item[1]}\nQuantidade: {item[4]}', item[4])
     plt.show()
+
+def salvaEmTxt(vid):
+    nome = vendedores[vid][2]
+    prompt = (f'Produtos_{nome}.txt')
+    with open(prompt, 'w') as arquivo:
+        for prod in produtos[vid]:
+            arquivo.write(f'\nCódigo: {prod[0]}')
+            arquivo.write(f'\nNome: {prod[1]}')
+            arquivo.write(f'\nPreço: R$ {prod[2]:.2f}')
+            arquivo.write(f'\nDescrição: {prod[3]}')
+            arquivo.write(f'\nQuantidade em estoque: {prod[4]}')
+            arquivo.write('\n')
+    aviso(f'O arquivo "{prompt}" foi gerado com sucesso.')
 
 def manipulaProduto(vid,cod='',opcao=''):
     if (opcao == 'cadastrar'):

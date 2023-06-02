@@ -1,5 +1,5 @@
 from layouts import *
-
+import openai
 
 def existeVendedor(dadoInserido):
     for vid in vendedores:
@@ -31,7 +31,7 @@ vendedores = {1:['a','','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456'
 
 iniProd = {1:5,2:1}
 
-produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica especial',12],['1003','Laranja',1.06,'Laranja lima da Bahia',23],['1004','Abacaxi',5,'Abacaxi caramelo albino',8],['1005','Manga',1.30,'Manga rosa da aldeia Ibiriuproproene do Sul',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
+produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica',12],['1003','Laranja',1.06,'Fruta laranja lima',23],['1004','Abacaxi',5,'Abacaxi tropical',8],['1005','Manga',1.30,'Fruta manga rosa',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
 
 clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
@@ -98,19 +98,41 @@ def existeItem(bd, xid):
     else:
         return False
 
-def detalheProduto(vid, cod):
+def detalheProduto(vid, cod, compra=''):
     for prod in produtos[vid]:
         if cod == prod[0]:
-            print(f'\nCódigo: {CGRE}{prod[0]}{CEND}')
+            print(f'\nCódigo: {prod[0]}')
             print(f'Nome: {prod[1]}')
             print(f'Preço: R$ {prod[2]:.2f}')
-            print(f'Descrição: {prod[3]}')
-            print(f'Quantidade em estoque: {prod[4]}')
+            if (compra == ''):
+                print(f'Descrição: {prod[3]}')
+                print(f'Quantidade em estoque: {prod[4]}')
+            else:
+                detChat = consultachatgpt(prod[3])
+                detChat = str(detChat).strip()
+                print(f'Descrição detalhada: {detChat}')
+                print(f'Quantidade em estoque: {CGRE}{prod[4]}{CEND}')
             if (prod[4] > 0):
                 return True
             else:
                 return False
             break
+
+def consultachatgpt(produto):
+    openai.api_key = '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'
+    model_engine = "text-davinci-003"
+    prompt = 'O que você acha de ' + produto + '? Descreva em 15 palavras'
+    max_tokens = 128
+    completion = openai.Completion.create(
+        engine=model_engine,
+        prompt=prompt,
+        max_tokens=max_tokens,
+        temperature=0.5,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+    )
+    return completion.choices[0].text
 
 def manipulaEstoque(vid, cod, qtd, unico, op=''):
     for prod in produtos[vid]:
