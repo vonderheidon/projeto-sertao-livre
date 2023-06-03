@@ -142,10 +142,8 @@ def pesquisarProd(cid):
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
             resultPesquisaProd(1, 'no nome', cid)
-            break
         elif (opcao == '2'):
             resultPesquisaProd(3, 'na descrição', cid)
-            break
         elif (opcao == '3'):
             verMaisPesquisados()
         elif (opcao == '0'):
@@ -154,8 +152,9 @@ def pesquisarProd(cid):
             erro('Opcao invalida.')
 
 def resultPesquisaProd(campo, prompt, cid):
-    codigos = list()
+    codigos = dict()
     busca = str(input(f'\nPesquisando {prompt}: ').lower())
+    retorna = False
     if (busca != ''):
         while True:
             achei = False
@@ -163,27 +162,33 @@ def resultPesquisaProd(campo, prompt, cid):
                 for item in prod:
                     lowprod = item[campo].lower()
                     if (lowprod.find(busca) >= 0):
-                        codigos.append(item[0])
                         if not achei:
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
                             print(f'\nCódigo -  Produto  -  Preço un. -  Descrição')
                         print(f'{CGRE} {item[0]}{CEND}  -  {item[1]:<8} -  R$ {item[2]:<6.2f} -  {item[3]}')
-                        adicionaPesquisados(item[0],item[1])
+                        codigos[item[0]] = item[1]
                         achei = True
             if achei:
+                if not retorna:
+                    for item in codigos:
+                        adicionaPesquisados(item,codigos[item])
                 print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')
                 opcao = str(input('\nDigite a opcao desejada: '))
                 if (opcao == '1'):
                     cod = str(input('Digite o código do produto: '))
                     if cod in codigos:
                         vid = selecionaID(cod)
-                        exibirDetalhes(cid, cod, vid)
+                        status = exibirDetalhes(cid, cod, vid)
+                        if (status == 'pesquisaOff'):
+                            retorna = True
                     else:
                         erro('Produto não encontrado.')
+                        retorna = True
                 elif (opcao == '0'):
                     break
                 else:
                     erro('Opção inválida.')
+                    retorna = True
             else:
                 erro(f'Nao tem nenhum produto com o termo "{busca}" {prompt}.')
                 return
@@ -228,7 +233,7 @@ def exibirDetalhes(cid, cod, vid):
             elif (opcao == '2'):
                 adicionaCarrinho(cid, cod, vid)
             elif (opcao == '0'):
-                break
+                return 'pesquisaOff'
             else:
                 erro('Opcao invalida.')
         else:

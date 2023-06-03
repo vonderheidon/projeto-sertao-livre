@@ -33,7 +33,7 @@ iniProd = {1:5,2:2}
 
 produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica',12],['1003','Laranja',1.06,'Fruta laranja lima',23],['1004','Abacaxi',5,'Abacaxi tropical',8],['1005','Manga',1.30,'Fruta manga rosa',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3],['2002','Banana',5.80,'Dúzia banana nanica',23]]}
 
-clientes = {1:['samanta','123456','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
+clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
 iniComp = {1:2,2:1}
 
@@ -135,7 +135,7 @@ def consultachatgpt(produto):
         )
         return completion.choices[0].text
     except:
-        return 'Erro ao obter as informações do ChatGPT.'
+        return f'{CRED}Erro ao obter as informações do ChatGPT.{CEND}'
 
 def manipulaEstoque(vid, cod, qtd, unico, op=''):
     for prod in produtos[vid]:
