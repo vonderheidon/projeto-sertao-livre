@@ -29,9 +29,9 @@ def attDadosBD(bd,usuario,dado,campo):
 
 vendedores = {1:['rogerio','123456','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
-iniProd = {1:5,2:1}
+iniProd = {1:5,2:2}
 
-produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica',12],['1003','Laranja',1.06,'Fruta laranja lima',23],['1004','Abacaxi',5,'Abacaxi tropical',8],['1005','Manga',1.30,'Fruta manga rosa',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3]]}
+produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica',12],['1003','Laranja',1.06,'Fruta laranja lima',23],['1004','Abacaxi',5,'Abacaxi tropical',8],['1005','Manga',1.30,'Fruta manga rosa',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3],['2002','Banana',5.80,'Dúzia banana nanica',23]]}
 
 clientes = {1:['samanta','123456','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
@@ -120,7 +120,7 @@ def detalheProduto(vid, cod, compra=''):
 
 def consultachatgpt(produto):
     try:
-        openai.api_key = 'insira a chave'
+        openai.api_key = 'INSIRA A CHAVE API'
         model_engine = "text-davinci-003"
         prompt = 'O que você acha de ' + produto + '? Descreva em 18 palavras'
         max_tokens = 128
