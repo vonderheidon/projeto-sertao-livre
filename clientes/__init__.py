@@ -19,7 +19,7 @@ def menuCliente(texto):
 
 def menuPrincipal(cid):
     while True:
-        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Meu Carrinho\n[5] - Ver gráfico dos 5 itens mais pesquisados\n[0] - Sair da conta')
+        texto = ('\n[1] - Meu perfil\n[2] - Minhas Compras\n[3] - Pesquisar produtos\n[4] - Meu Carrinho\n[0] - Sair da conta')
         menu = layMPrincipal(clientes, cid, texto)
         if (menu == '1'):
             meuPerfil(cid)
@@ -29,8 +29,6 @@ def menuPrincipal(cid):
             pesquisarProd(cid)
         elif (menu == '4'):
             meuCarrinho(cid)
-        elif (menu == '5'):
-            verMaisPesquisados()
         elif (menu == '0'):
             carrinho.clear()
             iniCar[0] = 0
@@ -140,7 +138,7 @@ def pesquisarProd(cid):
         print(45 * '-')
         print(f'{CBLU}Tela de pesquisa de produtos | {clientes[cid][2]}{CEND}')
         print(f'\nPelo o que você deseja pesquisar?')
-        print('\n[1] - Nome\n[2] - Descrição\n[0] - Voltar ao menu anterior')
+        print('\n[1] - Nome\n[2] - Descrição\n[3] - Ver gráfico dos 5 itens mais pesquisados\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
             resultPesquisaProd(1, 'no nome', cid)
@@ -148,6 +146,8 @@ def pesquisarProd(cid):
         elif (opcao == '2'):
             resultPesquisaProd(3, 'na descrição', cid)
             break
+        elif (opcao == '3'):
+            verMaisPesquisados()
         elif (opcao == '0'):
             break
         else:

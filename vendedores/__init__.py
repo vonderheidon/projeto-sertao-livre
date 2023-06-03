@@ -111,16 +111,16 @@ def listarComGrafico(vid):
     plt.show()
 
 def salvaEmTxt(vid):
-    nome = vendedores[vid][2]
-    prompt = (f'Produtos_{nome}.txt')
-    with open(prompt, 'w') as arquivo:
-        for prod in produtos[vid]:
-            arquivo.write(f'\nCódigo: {prod[0]}')
-            arquivo.write(f'\nNome: {prod[1]}')
-            arquivo.write(f'\nPreço: R$ {prod[2]:.2f}')
-            arquivo.write(f'\nDescrição: {prod[3]}')
-            arquivo.write(f'\nQuantidade em estoque: {prod[4]}')
-            arquivo.write('\n')
+    nome = vendedores[vid][0]
+    prompt = (f'produtosEmTxt\Produtos_{nome}.txt')
+    arquivo =  open(prompt, 'w')
+    for prod in produtos[vid]:
+        arquivo.write(f'Código: {prod[0]}')
+        arquivo.write(f'\nNome: {prod[1]}')
+        arquivo.write(f'\nPreço: R$ {prod[2]:.2f}')
+        arquivo.write(f'\nDescrição: {prod[3]}')
+        arquivo.write(f'\nQuantidade em estoque: {prod[4]}\n\n')
+    arquivo.close()
     aviso(f'O arquivo "{prompt}" foi gerado com sucesso.')
 
 def manipulaProduto(vid,cod='',opcao=''):
