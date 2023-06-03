@@ -282,4 +282,4 @@ def finalizaPedido(cid, unico):
                             iniCar[0] = 0
                         break
             break
-    aviso(f'Pedido código {nid} finalizado com com sucesso.')
+    aviso(f'Pedido código {nid} finalizado com sucesso.')
