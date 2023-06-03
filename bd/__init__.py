@@ -120,9 +120,9 @@ def detalheProduto(vid, cod, compra=''):
 
 def consultachatgpt(produto):
     try:
-        openai.api_key = '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'
+        openai.api_key = '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'
         model_engine = "text-davinci-003"
-        prompt = 'O que você acha de ' + produto + '? Descreva em 15 palavras'
+        prompt = 'O que você acha de ' + produto + '? Descreva em 18 palavras'
         max_tokens = 128
         completion = openai.Completion.create(
             engine=model_engine,
