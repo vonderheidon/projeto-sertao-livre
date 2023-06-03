@@ -73,10 +73,9 @@ def minhasCompras(cid):
             print(f'{CBLU}Lista de pedidos | {clientes[cid][2]}{CEND}')
             pedidos = retornaPedidos(cid)
             for chave in pedidos.keys():
-                print(f'\nCod: {CGRE}{chave}{CEND}\nProdutos:', end='')
+                print(f'\nCod: {CGRE}{chave}{CEND}')
                 for item in pedidos[chave]:
-                    print(f' | {item[1]} - Un: {item[4]}', end='')
-                print()
+                    print(f'{item[1]} - Un: {item[4]}')
             print('\n[1] - Exibir detalhes\n[0] - Voltar ao menu anterior')
             opcao = str(input('\nDigite a opcao desejada: '))
             if (opcao == '1'):
