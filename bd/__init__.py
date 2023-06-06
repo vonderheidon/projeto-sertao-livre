@@ -27,23 +27,25 @@ def attDadosBD(bd,usuario,dado,campo):
     bd[usuario][campo] = dado
 
 
-vendedores = {1:['rogerio','123456','Rogerio Brito','rogerio@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
+vendedores = {1:['rogerio','123456','Rogerio Brito','rogerio@mail.com'], 2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
-iniProd = {1:5,2:2}
+iniProd = {1:5, 2:2}
 
-produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15],['1002','Goiaba',0.96,'Goiaba orgânica',12],['1003','Laranja',1.06,'Fruta laranja lima',23],['1004','Abacaxi',5,'Abacaxi tropical',8],['1005','Manga',1.30,'Fruta manga rosa',22]],2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3],['2002','Banana',5.80,'Dúzia banana nanica',23]]}
+produtos = {1:[['1001','Banana',6.23,'Dúzia banana nanica',15], ['1002','Goiaba',0.96,'Goiaba orgânica',12], ['1003','Laranja',1.06,'Fruta laranja lima',23],
+               ['1004','Abacaxi',5,'Abacaxi tropical',8], ['1005','Manga',1.30,'Fruta manga rosa',22]],
+            2:[['2001','Ovo',22.30,'Dúzia do ovo tamanho grande',3], ['2002','Banana',5.80,'Dúzia banana nanica',23]]}
 
-clientes = {1:['sa','','Samanta Biloba','samanta@mail.com'],2:['marcos','123456','Marcos Lira','marcos@mail.com']}
+clientes = {1:['samanta','123456','Samanta Biloba','samanta@mail.com'], 2:['marcos','123456','Marcos Lira','marcos@mail.com']}
 
-iniComp = {1:2,2:1}
+iniComp = {1:2, 2:1}
 
 compras = {
-    1: [{'1sa1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1],['1002','Goiaba',0.96,'Goiaba da terra',3]]},
+    1: [{'1sa1001': [['1001', 'Banana', 6.23, 'Banana Nanica', 1], ['1002','Goiaba',0.96,'Goiaba da terra',3]]},
         {'1sa1002': [['1002','Goiaba',0.96,'Goiaba da terra',3]]}],
     2: [{'2ma2001': [['2001','Ovo',22.30,'Ovo tamanho grande',3]]}]
            }
 
-maisPesquisados = [{'cod':'1001','nome':'Banana','qtd':3},{'cod':'1002','nome':'Goiaba','qtd':5},{'cod':'2001','nome':'Ovo','qtd':2}]
+maisPesquisados = [{'cod':'1001','nome':'Banana','qtd':3}, {'cod':'1002','nome':'Goiaba','qtd':5}, {'cod':'2001','nome':'Ovo','qtd':2}]
 
 iniCar = [0]
 
@@ -120,7 +122,7 @@ def detalheProduto(vid, cod, compra=''):
 
 def consultachatgpt(produto):
     try:
-        openai.api_key = 'INSIRA A CHAVE API'
+        openai.api_key = ''
         model_engine = "text-davinci-003"
         prompt = 'O que você acha de ' + produto + '? Descreva em 18 palavras'
         max_tokens = 128
