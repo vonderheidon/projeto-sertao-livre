@@ -120,6 +120,11 @@ def detalheProduto(vid, cod, compra=''):
                 return False
             break
 
+def detProdSimples(vid, cod, campo):
+    for prod in produtos[vid]:
+        if cod == prod[0]:
+            return (f'{prod[campo]}')
+
 def consultachatgpt(produto):
     try:
         openai.api_key = ''
@@ -177,10 +182,10 @@ def excluiProduto(vid, cod):
             produtos[vid].remove(prod)
             break
 
-def attProduto(vid,cod,dados):
+def attProduto(vid,cod,dado,campo):
     for prod in produtos[vid]:
         if cod == prod[0]:
-            prod[1:4] = dados
+            prod[campo] = dado
             break
 
 def cadastrarUsuario(op):
@@ -213,6 +218,7 @@ def cadastrarUsuario(op):
                         novoId = ultimoId(clientes) + 1
                         cadastroBD(infos, novoId, clientes, compras, iniComp)
                     aviso(f'Cadastro de {op} efetuado com sucesso!')
+
 def novoIdCompra(cid):
     iniComp[cid] += 1
     for chave in clientes.keys():
@@ -243,6 +249,31 @@ def entrar(op):
             return cid
         else:
             erro('Usuario ou senha inválidos.')
+
+def attProdStr(vid, prompt1, tamanho, campo, cod):
+    info = detProdSimples(vid, cod, campo)
+    infoAtual = (f'\n{prompt1} atual do produto selecionado eh: {info}')
+    dado = verInputStr(tamanho,'Digite o novo: ',prompt1,prompt3=infoAtual)
+    if (dado != False):
+        attProduto(vid, cod, dado, campo)
+        info = detProdSimples(vid, cod, campo)
+        aviso(f'{prompt1} foi atualizado com sucesso para {info}')
+
+def attProdNum(vid, prompt1, campo, cod, tipo):
+    info = detProdSimples(vid, cod, campo)
+    if (tipo=='int'):
+        infoAtual = (f'\n{prompt1} atual do produto selecionado eh: {info}')
+        dado = verInputNumProd('Digite o novo: ', infoAtual, tipo='int')
+    elif (tipo=='float'):
+        infoAtual = (f'\n{prompt1} atual do produto selecionado eh: R$ {info}')
+        dado = verInputNumProd('Digite o novo: ', infoAtual, tipo='float')
+    if (dado != 'erro'):
+        attProduto(vid, cod, dado, campo)
+        info = detProdSimples(vid, cod, campo)
+        if (tipo == 'int'):
+            aviso(f'{prompt1} foi atualizada com sucesso para {info}')
+        elif (tipo == 'float'):
+            aviso(f'{prompt1} foi atualizado com sucesso para R$ {info}')
 
 def atualizarDados(bd,xid,prompt1,tamanho,campo):
     infoAtual = (f'\n{prompt1} atual eh: {bd[xid][campo]}')

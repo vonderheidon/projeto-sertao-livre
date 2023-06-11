@@ -98,3 +98,17 @@ def verInputNum(prompt1,tipo=''):
             print(f'{CRED}\nErro! O valor digitado é inválido.{CEND}')
             if not tentarNovamente():
                 return 'erro'
+
+def verInputNumProd(prompt1, infoatual, tipo=''):
+    while True:
+        try:
+            print(infoatual)
+            if (tipo == 'int'):
+                numero = int(input(prompt1))
+            elif (tipo == 'float'):
+                numero = float(input(prompt1))
+            return numero
+        except:
+            print(f'{CRED}\nErro! O valor digitado é inválido.{CEND}')
+            if not tentarNovamente():
+                return 'erro'
