@@ -66,7 +66,7 @@ def meusProdutos(vid):
         elif (menu == '2'):
             listarComGrafico(vid)
         elif (menu == '3'):
-            manipulaProduto(vid,opcao='cadastrar')
+            cadastraProduto(vid)
         elif (menu == '4'):
             pesquisarProduto(vid)
         elif (menu == '5'):
@@ -123,12 +123,9 @@ def salvaEmTxt(vid):
     arquivo.close()
     aviso(f'O arquivo "{prompt}" foi gerado com sucesso.')
 
-def manipulaProduto(vid,cod='',opcao=''):
-    if (opcao == 'cadastrar'):
-        print(45 * '-')
-        print(f'{CBLU}Tela de cadastro de produto | {vendedores[vid][2]}{CEND}')
-    elif (opcao == 'atualizar'):
-        print(f'\n{CBLU}Digite os novos valores para o produto selecionado.{CEND}')
+def cadastraProduto(vid):
+    print(45 * '-')
+    print(f'{CBLU}Tela de cadastro de produto | {vendedores[vid][2]}{CEND}')
     nome = verInputStr(3, '\nNome: ', 'O nome do produto')
     if (nome != False):
         preco = verInputNum('Preço: R$ ',tipo='float')
@@ -137,15 +134,10 @@ def manipulaProduto(vid,cod='',opcao=''):
             if (descricao != 'erro'):
                 quantidade = verInputNum('Quantidade: ',tipo='int')
                 if (quantidade != 'erro'):
-                    if (opcao == 'cadastrar'):
-                        iniProd[vid] += 1
-                        idProd = f'{vid}' + f'{iniProd[vid]:03}'
-                        produtos[vid].append([idProd, nome, preco, descricao, quantidade])
-                        aviso('Produto cadastrado com sucesso.')
-                    elif (opcao == 'atualizar'):
-                        dados = [nome,preco,descricao,quantidade]
-                        attProduto(vid,cod,dados)
-                        aviso('Produto atualizado com sucesso.')
+                    iniProd[vid] += 1
+                    idProd = f'{vid}' + f'{iniProd[vid]:03}'
+                    produtos[vid].append([idProd, nome, preco, descricao, quantidade])
+                    aviso('Produto cadastrado com sucesso.')
 
 def exibirDetalhes(vid, cod):
     while True:
@@ -155,10 +147,29 @@ def exibirDetalhes(vid, cod):
         print('\n[1] - Editar\n[2] - Excluir\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
-            manipulaProduto(vid, cod=cod, opcao='atualizar')
+            atualizarProduto(vid, cod)
         elif (opcao == '2'):
             if excluirProduto(vid,cod):
                 break
+        elif (opcao == '0'):
+            break
+        else:
+            erro('Opcao invalida.')
+
+def atualizarProduto(vid, cod):
+    while True:
+        print(45 * '-')
+        print(f'{CBLU}Tela de atualização do produto | {vendedores[vid][2]}{CEND}')
+        print('\n[1] - Nome\n[2] - Preço\n[3] - Descrição\n[4] - Quantidade\n[0] - Voltar ao menu anterior')
+        opcao = str(input('\nDigite a opcao desejada: '))
+        if (opcao == '1'):
+            attProdStr(vid, 'O nome', 3, 1, cod)
+        elif (opcao == '2'):
+            attProdNum(vid, 'O preço', 2, cod, tipo='float')
+        elif (opcao == '3'):
+            attProdStr(vid, 'A descrição', 3, 3, cod)
+        elif (opcao == '4'):
+            attProdNum(vid, 'A quantidade', 4, cod, tipo='int')
         elif (opcao == '0'):
             break
         else:
