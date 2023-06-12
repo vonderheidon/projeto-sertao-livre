@@ -38,7 +38,7 @@ produtos = {1:[['1001','Banana',6.23,'Dúzia fruta banana nanica',15], ['1002','
             3:[['3001','Playstation 5',3837.99,'Console Playstation 5',15],['3002','Xbox Series X',4337.00,'Console Xbox Series X',22],['3003','SSD 1TB',837.99,'SSD M.2 1TB',35],
                ['3004','Nintendo Switch',2253.08,'Console Nintendo Switch',14]]}
 
-clientes = {1:['s','','Samanta ThreeLegs','samanta@mail.com'], 2:['marcelo','123456','Marcelo Sampaio','marcelo@mail.com']}
+clientes = {1:['samanta','123456','Samanta ThreeLegs','samanta@mail.com'], 2:['marcelo','123456','Marcelo Sampaio','marcelo@mail.com']}
 
 iniComp = {1:2, 2:1}
 
