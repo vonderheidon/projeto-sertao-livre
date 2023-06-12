@@ -111,4 +111,4 @@ def verInputNumProd(prompt1, infoatual, tipo=''):
         except:
             print(f'{CRED}\nErro! O valor digitado é inválido.{CEND}')
             if not tentarNovamente():
-                return 'erro'
+                return False

@@ -123,7 +123,7 @@ def detalheProduto(vid, cod, compra=''):
 def detProdSimples(vid, cod, campo):
     for prod in produtos[vid]:
         if cod == prod[0]:
-            return (f'{prod[campo]}')
+            return prod[campo]
 
 def consultachatgpt(produto):
     try:
@@ -250,30 +250,24 @@ def entrar(op):
         else:
             erro('Usuario ou senha inválidos.')
 
-def attProdStr(vid, prompt1, tamanho, campo, cod):
-    info = detProdSimples(vid, cod, campo)
-    infoAtual = (f'\n{prompt1} atual do produto selecionado eh: {info}')
-    dado = verInputStr(tamanho,'Digite o novo: ',prompt1,prompt3=infoAtual)
-    if (dado != False):
-        attProduto(vid, cod, dado, campo)
-        info = detProdSimples(vid, cod, campo)
-        aviso(f'{prompt1} foi atualizado com sucesso para {info}')
-
-def attProdNum(vid, prompt1, campo, cod, tipo):
+def attProd(vid, prompt1, tamanho, campo, cod, tipo=''):
     info = detProdSimples(vid, cod, campo)
     if (tipo=='int'):
         infoAtual = (f'\n{prompt1} atual do produto selecionado eh: {info}')
-        dado = verInputNumProd('Digite o novo: ', infoAtual, tipo='int')
+        dado = verInputNumProd('Digite a nova quantidade: ', infoAtual, tipo='int')
     elif (tipo=='float'):
-        infoAtual = (f'\n{prompt1} atual do produto selecionado eh: R$ {info}')
-        dado = verInputNumProd('Digite o novo: ', infoAtual, tipo='float')
-    if (dado != 'erro'):
+        infoAtual = (f'\n{prompt1} atual do produto selecionado eh: R$ {info:.2f}')
+        dado = verInputNumProd('Digite o novo preço: R$ ', infoAtual, tipo='float')
+    else:
+        infoAtual = (f'\n{prompt1} atual do produto selecionado eh: {info}')
+        dado = verInputStr(tamanho,'Digite a nova informação: ',prompt1,prompt3=infoAtual)
+    if (dado != False):
         attProduto(vid, cod, dado, campo)
         info = detProdSimples(vid, cod, campo)
-        if (tipo == 'int'):
-            aviso(f'{prompt1} foi atualizada com sucesso para {info}')
-        elif (tipo == 'float'):
-            aviso(f'{prompt1} foi atualizado com sucesso para R$ {info}')
+        if (tipo=='float'):
+            aviso(f'{prompt1} foi atualizado com sucesso para R$ {info:.2f}')
+        else:
+            aviso(f'{prompt1} foi atualizado com sucesso para {info}')
 
 def atualizarDados(bd,xid,prompt1,tamanho,campo):
     infoAtual = (f'\n{prompt1} atual eh: {bd[xid][campo]}')

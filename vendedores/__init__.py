@@ -105,23 +105,29 @@ def listarProdutos(vid):
             return
 
 def listarComGrafico(vid):
-    for item in produtos[vid]:
-        plt.rcParams["figure.figsize"] = (12, 6)
-        plt.bar(f'Produto: {item[1]}\nQuantidade: {item[4]}', item[4])
-    plt.show()
+    if existeItem(produtos, vid):
+        for item in produtos[vid]:
+            plt.rcParams["figure.figsize"] = (12, 6)
+            plt.bar(f'Produto: {item[1]}\nQuantidade: {item[4]}', item[4])
+        plt.show()
+    else:
+        erro('Você ainda não tem nenhum produto cadastrado.')
 
 def salvaEmTxt(vid):
-    nome = vendedores[vid][0]
-    prompt = (f'produtosEmTxt\Produtos_{nome}.txt')
-    arquivo =  open(prompt, 'w')
-    for prod in produtos[vid]:
-        arquivo.write(f'Código: {prod[0]}')
-        arquivo.write(f'\nNome: {prod[1]}')
-        arquivo.write(f'\nPreço: R$ {prod[2]:.2f}')
-        arquivo.write(f'\nDescrição: {prod[3]}')
-        arquivo.write(f'\nQuantidade em estoque: {prod[4]}\n\n')
-    arquivo.close()
-    aviso(f'O arquivo "{prompt}" foi gerado com sucesso.')
+    if existeItem(produtos, vid):
+        nome = vendedores[vid][0]
+        prompt = (f'produtosEmTxt\Produtos_{nome}.txt')
+        arquivo =  open(prompt, 'w')
+        for prod in produtos[vid]:
+            arquivo.write(f'Código: {prod[0]}')
+            arquivo.write(f'\nNome: {prod[1]}')
+            arquivo.write(f'\nPreço: R$ {prod[2]:.2f}')
+            arquivo.write(f'\nDescrição: {prod[3]}')
+            arquivo.write(f'\nQuantidade em estoque: {prod[4]}\n\n')
+        arquivo.close()
+        aviso(f'O arquivo "{prompt}" foi gerado com sucesso.')
+    else:
+        erro('Você ainda não tem nenhum produto cadastrado.')
 
 def cadastraProduto(vid):
     print(45 * '-')
@@ -163,13 +169,13 @@ def atualizarProduto(vid, cod):
         print('\n[1] - Nome\n[2] - Preço\n[3] - Descrição\n[4] - Quantidade\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
-            attProdStr(vid, 'O nome', 3, 1, cod)
+            attProd(vid, 'O nome', 3, 1, cod)
         elif (opcao == '2'):
-            attProdNum(vid, 'O preço', 2, cod, tipo='float')
+            attProd(vid, 'O preço', None, 2, cod, tipo='float')
         elif (opcao == '3'):
-            attProdStr(vid, 'A descrição', 3, 3, cod)
+            attProd(vid, 'A descrição', 3, 3, cod)
         elif (opcao == '4'):
-            attProdNum(vid, 'A quantidade', 4, cod, tipo='int')
+            attProd(vid, 'A quantidade', None, 4, cod, tipo='int')
         elif (opcao == '0'):
             break
         else:
