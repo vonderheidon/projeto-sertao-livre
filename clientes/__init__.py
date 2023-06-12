@@ -67,8 +67,9 @@ def atualizarInfoPessoais(cid):
 def minhasCompras(cid):
     if existeItem(compras, cid):
         while True:
-            print(45 * '-')
-            print(f'{CBLU}Lista de pedidos | {clientes[cid][2]}{CEND}')
+            print(f'\n{CBLU}'+ (50 * '-'))
+            print(f'     Lista de pedidos | {clientes[cid][2]}')
+            print((50 * '-')+ f'{CEND}')
             pedidos = retornaPedidos(cid)
             for chave in pedidos.keys():
                 print(f'\nCod: {CGRE}{chave}{CEND}')
@@ -95,8 +96,9 @@ def meuCarrinho(cid):
     removido = False
     while True:
         if (len(carrinho) > 0):
-            print(45 * '-')
-            print(f'{CBLU}Meu carrinho | {clientes[cid][2]}{CEND}')
+            print(f'\n{CBLU}'+ (50 * '-'))
+            print(f'    Meu carrinho | {clientes[cid][2]}')
+            print((50 * '-') + f'{CEND}')
             totalPedido = 0
             for chave in carrinho.keys():
                 print(f'\nItem nº {CGRE}{chave}{CEND} | cod: {carrinho[chave][0]} - {carrinho[chave][1]} - Descrição: {carrinho[chave][3]}\nQuantidade: {carrinho[chave][4]} - Preço un. R$ {carrinho[chave][2]:.2f}')
@@ -135,8 +137,9 @@ def meuCarrinho(cid):
 
 def pesquisarProd(cid):
     while True:
-        print(45 * '-')
-        print(f'{CBLU}Tela de pesquisa de produtos | {clientes[cid][2]}{CEND}')
+        print(f'\n{CBLU}'+ (50 * '-'))
+        print(f'  Tela de pesquisa de produtos | {clientes[cid][2]}')
+        print((50 * '-') + f'{CEND}')
         print(f'\nPelo o que você deseja pesquisar?')
         print('\n[1] - Nome\n[2] - Descrição\n[3] - Ver gráfico dos 5 itens mais pesquisados\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
@@ -223,8 +226,9 @@ def adicionaPesquisados(codProd,nome):
 
 def exibirDetalhes(cid, cod, vid):
     while True:
-        print(45 * '-')
-        print(f'{CBLU}Tela de detalhes do produto | {clientes[cid][2]}{CEND}')
+        print(f'\n{CBLU}'+ (50 * '-'))
+        print(f'    Tela de detalhes do produto | {clientes[cid][2]}')
+        print((50 * '-') + f'{CEND}')
         if detalheProduto(vid, cod, compra='sim'):
             print('\n[1] - Comprar\n[2] - Adicionar ao carrinho\n[0] - Voltar ao menu anterior')
             opcao = str(input('\nDigite a opcao desejada: '))

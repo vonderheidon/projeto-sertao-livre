@@ -38,7 +38,7 @@ produtos = {1:[['1001','Banana',6.23,'Dúzia fruta banana nanica',15], ['1002','
             3:[['3001','Playstation 5',3837.99,'Console Playstation 5',15],['3002','Xbox Series X',4337.00,'Console Xbox Series X',22],['3003','SSD 1TB',837.99,'SSD M.2 1TB',35],
                ['3004','Nintendo Switch',2253.08,'Console Nintendo Switch',14]]}
 
-clientes = {1:['samanta','123456','Samanta ThreeLegs','samanta@mail.com'], 2:['marcelo','123456','Marcelo Sampaio','marcelo@mail.com']}
+clientes = {1:['s','','Samanta ThreeLegs','samanta@mail.com'], 2:['marcelo','123456','Marcelo Sampaio','marcelo@mail.com']}
 
 iniComp = {1:2, 2:1}
 
@@ -193,8 +193,9 @@ def attProduto(vid,cod,dado,campo):
             break
 
 def cadastrarUsuario(op):
-    print(51 * '-')
-    print(f'{CBLU}Complete os dados para criar sua conta de {op}!{CEND}')
+    print(f'\n{CYEL}' + (59 * '-'))
+    print(f'    Complete os dados para criar sua conta de {op}!')
+    print((59 * '-') + f'{CEND}')
     while True:
         usuario = verInputStr(3, '\nUsuario: ', 'O seu usuario')
         if (op == 'vendedor'):
@@ -237,9 +238,10 @@ def novoIdCompra(cid):
     return novoId
 
 def entrar(op):
-    print(39 * '-')
-    print(f'{CBLU}Tela de login - {op} | Sertao Livre\n{CEND}')
-    usuario = str(input('Nome de usuario: '))
+    print(f'\n{CYEL}' + (47 * '-'))
+    print(f'    Tela de login - {op} | Sertao Livre')
+    print((47 * '-') + f'{CEND}')
+    usuario = str(input('\nNome de usuario: '))
     senha = str(input('Senha: '))
     if (op == 'vendedor'):
         vid = existeDado(usuario, vendedores)

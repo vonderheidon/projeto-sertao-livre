@@ -80,8 +80,9 @@ def listarProdutos(vid):
     while True:
         if existeItem(produtos, vid):
             codigos = list()
-            print(45 * '-')
-            print(f'{CBLU}Tela produtos cadastrados | {vendedores[vid][2]}{CEND}')
+            print(f'\n{CGRE}' + (50 * '-'))
+            print(f'    Tela produtos cadastrados | {vendedores[vid][2]}')
+            print((50 * '-') + f'{CEND}')
             print(f'\nCódigo - Produto')
             for item in produtos[vid]:
                 codigos.append(item[0])
@@ -130,8 +131,9 @@ def salvaEmTxt(vid):
         erro('Você ainda não tem nenhum produto cadastrado.')
 
 def cadastraProduto(vid):
-    print(45 * '-')
-    print(f'{CBLU}Tela de cadastro de produto | {vendedores[vid][2]}{CEND}')
+    print(f'\n{CGRE}' + (50 * '-'))
+    print(f'    Tela de cadastro de produto | {vendedores[vid][2]}')
+    print((50 * '-') + f'{CEND}')
     nome = verInputStr(3, '\nNome: ', 'O nome do produto')
     if (nome != False):
         preco = verInputNum('Preço: R$ ',tipo='float')
@@ -147,8 +149,9 @@ def cadastraProduto(vid):
 
 def exibirDetalhes(vid, cod):
     while True:
-        print(45 * '-')
-        print(f'{CBLU}Tela de detalhes do produto | {vendedores[vid][2]}{CEND}')
+        print(f'\n{CBLU}' + (50 * '-'))
+        print(f'    Tela de detalhes do produto | {vendedores[vid][2]}')
+        print((50 * '-') + f'{CEND}')
         detalheProduto(vid, cod)
         print('\n[1] - Editar\n[2] - Excluir\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
@@ -164,8 +167,9 @@ def exibirDetalhes(vid, cod):
 
 def atualizarProduto(vid, cod):
     while True:
-        print(45 * '-')
-        print(f'{CBLU}Tela de atualização do produto | {vendedores[vid][2]}{CEND}')
+        print(f'\n{CGRE}' + (50 * '-'))
+        print(f'   Tela de atualização do produto | {vendedores[vid][2]}')
+        print((50 * '-') + f'{CEND}')
         print('\n[1] - Nome\n[2] - Preço\n[3] - Descrição\n[4] - Quantidade\n[0] - Voltar ao menu anterior')
         opcao = str(input('\nDigite a opcao desejada: '))
         if (opcao == '1'):
@@ -195,8 +199,9 @@ def excluirProduto(vid, cod):
 def pesquisarProduto(vid):
     while True:
         if existeItem(produtos, vid):
-            print(45 * '-')
-            print(f'{CBLU}Tela de pesquisa de produtos | {vendedores[vid][2]}{CEND}')
+            print(f'\n{CGRE}' + (50 * '-'))
+            print(f'    Tela de pesquisa de produtos | {vendedores[vid][2]}')
+            print((50 * '-') + f'{CEND}')
             print(f'\nPelo o que você deseja pesquisar?')
             print('\n[1] - Nome\n[2] - Descrição\n[0] - Voltar ao menu anterior')
             opcao = str(input('\nDigite a opcao desejada: '))

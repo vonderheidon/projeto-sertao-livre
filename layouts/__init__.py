@@ -3,7 +3,7 @@ CYEL = '\33[93m'
 CEND = '\33[0m'
 CBLU = '\33[34m'
 CGRE = '\33[92m'
-
+x = str()
 
 def layMini():
     print(f'\n{CYEL}')
@@ -21,20 +21,23 @@ def layMini():
     return opcao
 
 def layMsec(texto):
-    print(f'\n{CBLU}{texto}{CEND}')
+    print(f'\n{CYEL}{texto}{CEND}')
     print('\n[1] - Cadastrar-se\n[2] - Entrar\n[0] - Voltar ao menu inicial')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
 def layMPrincipal(bd,xid,texto):
-    print(f'{CGRE}\nSeja Bem vindo, {bd[xid][2]}.{CEND}')
+    print(f'\n{CGRE}' + (47 * '-'))
+    print(f'{x:>6}Seja Bem vindo(a), {bd[xid][2]}.')
+    print((47 * '-') + f'{CEND}')
     print(texto)
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
 def layMmperf(bd,xid):
-    print(45 * '-')
-    print(f'{CBLU}Tela de perfil | {bd[xid][2]}{CEND}')
+    print(f'\n{CBLU}' + (47 * '-'))
+    print(f'      Tela de perfil | {bd[xid][2]}')
+    print((47 * '-')+ f'{CEND}')
     print(f'\nNome completo: {bd[xid][2]}')
     print(f'E-mail: {bd[xid][3]}')
     print(f'Usuario: {bd[xid][0]}')
@@ -43,15 +46,17 @@ def layMmperf(bd,xid):
     return opcao
 
 def layAttinf(bd,xid):
-    print(60 * '-')
-    print(f'{CBLU}Tela de atualizacao de informacoes pessoais | {bd[xid][2]}{CEND}')
+    print(f'\n{CGRE}' + (60 * '-'))
+    print(f'Tela de atualizacao de informacoes pessoais | {bd[xid][2]}')
+    print((60 * '-') + f'{CEND}')
     print('\n[1] - Nome completo\n[2] - E-mail\n[3] - Usuario\n[4] - Senha\n[0] - Para voltar ao menu anterior')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
 
 def layMmprod(vendedores,vid):
-    print(45 * '-')
-    print(f'{CBLU}Tela de produtos | {vendedores[vid][2]}{CEND}')
+    print(f'\n{CBLU}' + (40 * '-'))
+    print(f'    Tela de produtos | {vendedores[vid][2]}')
+    print((40 * '-') + f'{CEND}')
     print('\n[1] - Listar todos cadastrados\n[2] - Gráfico produtos cadastrados\n[3] - Cadastrar um novo\n[4] - Buscar\n[5] - Exportar produtos\n[0] - Para voltar ao menu anterior')
     opcao = str(input('\nDigite a opcao desejada: '))
     return opcao
