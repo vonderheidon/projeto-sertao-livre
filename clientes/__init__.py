@@ -164,8 +164,8 @@ def resultPesquisaProd(campo, prompt, cid):
                     if (lowprod.find(busca) >= 0):
                         if not achei:
                             print(f'\n{CYEL}O que encontramos com o termo "{busca}" {prompt}:{CEND}')
-                            print(f'\nCódigo -  Produto  -  Preço un. -  Descrição')
-                        print(f'{CGRE} {item[0]}{CEND}  -  {item[1]:<8} -  R$ {item[2]:<6.2f} -  {item[3]}')
+                            print(f'\nCódigo -  Produto          -  Preço un.  -  Descrição')
+                        print(f'{CGRE} {item[0]}{CEND}  -  {item[1]:<16} -  R$ {item[2]:<7.2f} -  {item[3]}')
                         codigos[item[0]] = item[1]
                         achei = True
             if achei:
